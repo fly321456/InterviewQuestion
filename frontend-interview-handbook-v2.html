@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InterviewPrep Pro - Front-End Handbook</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "primary": "#003441",
+                        "tertiary-fixed-dim": "#ffb597",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-highest": "#e4e2e1",
+                        "secondary-container": "#e0dfdf",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#ff9a6e",
+                        "surface-variant": "#e4e2e1",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#7c2c00",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed": "#360f00",
+                        "outline": "#70787c",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#9acee1",
+                        "primary-fixed": "#b6ebfe",
+                        "on-primary-fixed": "#001f28",
+                        "on-surface-variant": "#40484b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "outline-variant": "#c0c8cb",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary-fixed-variant": "#114d5d",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-surface": "#1b1c1c",
+                        "primary-container": "#0f4c5c",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-secondary-fixed-variant": "#464746",
+                        "secondary-fixed-dim": "#c7c6c5",
+                        "on-error-container": "#93000a",
+                        "surface": "#fcf9f8",
+                        "tertiary": "#571d00",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed": "#e3e2e1",
+                        "surface-tint": "#306576",
+                        "on-error": "#ffffff",
+                        "secondary": "#5e5e5e",
+                        "inverse-surface": "#303030",
+                        "on-primary-container": "#87bbce",
+                        "on-secondary-container": "#626362",
+                        "surface-container": "#f0eded",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-primary": "#9acee1",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "64px",
+                        "xs": "4px",
+                        "container-max": "1200px",
+                        "unit": "4px",
+                        "xl": "40px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "code": ["ui-monospace"],
+                        "body-md": ["Inter"],
+                        "display": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "code": ["14px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .code-block {
+            background-color: rgba(0, 52, 65, 0.05);
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        .transition-height {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+<nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold tracking-tight text-teal-900 font-h1">InterviewPrep Pro</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-manrope text-sm font-medium text-teal-700 border-b-2 border-teal-700 pb-1" href="#">Practice</a>
+<a class="font-manrope text-sm font-medium text-slate-500 hover:text-teal-600 transition-all duration-200" href="#">Roadmaps</a>
+<a class="font-manrope text-sm font-medium text-slate-500 hover:text-teal-600 transition-all duration-200" href="#">Leaderboard</a>
+<a class="font-manrope text-sm font-medium text-slate-500 hover:text-teal-600 transition-all duration-200" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-slate-500 hover:bg-slate-50 rounded-full">search</button>
+<button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-manrope text-sm font-semibold active:scale-95 transition-transform">Sign In</button>
+</div>
+</nav>
+</header>
+<main class="pt-24 pb-xxl">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-gutter mb-xxl text-center md:text-left">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="flex-1">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed font-label-caps rounded-full mb-4">v2.4 HANDBOOK</span>
+<h1 class="font-display text-display text-primary mb-6">Front-End Interview Handbook</h1>
+<p class="font-body-lg text-body-lg text-secondary mb-8 max-w-2xl">Master the engineering principles, architectural patterns, and business logic required for senior front-end roles in 2024.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-white border border-slate-200 p-4 rounded-xl">
+<div class="text-primary font-h2 mb-1">150+</div>
+<div class="text-secondary font-label-caps">QUESTIONS</div>
+</div>
+<div class="bg-white border border-slate-200 p-4 rounded-xl">
+<div class="text-primary font-h2 mb-1">12</div>
+<div class="text-secondary font-label-caps">CATEGORIES</div>
+</div>
+<div class="bg-white border border-slate-200 p-4 rounded-xl">
+<div class="text-primary font-h2 mb-1">98%</div>
+<div class="text-secondary font-label-caps">SUCCESS RATE</div>
+</div>
+<div class="bg-white border border-slate-200 p-4 rounded-xl">
+<div class="text-primary font-h2 mb-1">AI</div>
+<div class="text-secondary font-label-caps">MOCK READY</div>
+</div>
+</div>
+</div>
+<div class="hidden md:block w-1/3">
+<div class="relative">
+<div class="absolute -inset-4 bg-tertiary-fixed opacity-30 rounded-full blur-3xl"></div>
+<img class="relative rounded-2xl shadow-2xl border border-slate-200" data-alt="high-quality clean workspace with a laptop showing code and a coffee mug with minimalist desk aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCne1K1Sd2hwNVeLCz88MbVRmXakR9gb2umjvtvlo77FqUruprsiM-rzRJ-OWRd6rRZPtkkICSxkTUktl9SJi7733R6M81l2pNHfC0r2HnIIHTLHvaRmOYLqLW3KyX-cmhG1rTA9jJzLGcvrm9-sMmcfnyIh-RC3KEkqaFQAFBU8nRcSajVWybk9fxrA3iFwKpKoZxIeWleezLP9VBFBrWX0xsT8NX_I2uhr4zzHZUPTJLCHB4rN5cUoTcbSQucyAI4JiP91lzjWybD"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Toolbar -->
+<section class="max-w-7xl mx-auto px-gutter mb-lg sticky top-20 z-40">
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-6 items-center">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Search questions, concepts, or keywords..." type="text"/>
+</div>
+<div class="flex-1 flex overflow-x-auto gap-2 no-scrollbar w-full">
+<button class="whitespace-nowrap px-4 py-1.5 bg-primary text-white font-body-sm rounded-full">All</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-slate-100 text-secondary hover:bg-slate-200 font-body-sm rounded-full transition-colors">JavaScript</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-slate-100 text-secondary hover:bg-slate-200 font-body-sm rounded-full transition-colors">TypeScript</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-slate-100 text-secondary hover:bg-slate-200 font-body-sm rounded-full transition-colors">Architecture</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-slate-100 text-secondary hover:bg-slate-200 font-body-sm rounded-full transition-colors">Vue/React</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-slate-100 text-secondary hover:bg-slate-200 font-body-sm rounded-full transition-colors">Node/BFF</button>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 text-secondary font-body-sm rounded-lg hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">unfold_more</span>
+                        Expand All
+                    </button>
+</div>
+</div>
+</section>
+<!-- Question Grid -->
+<section class="max-w-7xl mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Sidebar Info (Bento Style) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-primary p-8 rounded-3xl text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-9xl">lightbulb</span>
+</div>
+<h3 class="font-h3 text-h3 mb-4 relative z-10">Daily Tip</h3>
+<p class="font-body-md text-white/80 leading-relaxed mb-6 relative z-10">When explaining React's reconciliation, use the "diffing" analogy. Focus on how Fiber allows breaking down work into smaller units.</p>
+<button class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-body-sm transition-colors backdrop-blur-md relative z-10">Read More</button>
+</div>
+<div class="bg-tertiary-container p-8 rounded-3xl text-on-tertiary-container">
+<h3 class="font-h3 text-h3 mb-4">Study Progress</h3>
+<div class="w-full bg-white/10 rounded-full h-2 mb-2">
+<div class="bg-tertiary-fixed-dim h-2 rounded-full w-[64%]"></div>
+</div>
+<div class="flex justify-between text-body-sm">
+<span>Topic Completion</span>
+<span>64%</span>
+</div>
+</div>
+<div class="bg-white border border-slate-200 p-8 rounded-3xl">
+<h3 class="font-h3 text-h3 text-primary mb-4">Top Categories</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-teal-500"></span> JavaScript</span>
+<span class="text-secondary">42 Qs</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-orange-500"></span> CSS Layouts</span>
+<span class="text-secondary">28 Qs</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Web Performance</span>
+<span class="text-secondary">15 Qs</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Question List -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Question 1 -->
+<div class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all group overflow-hidden">
+<details class="w-full">
+<summary class="p-8 cursor-pointer list-none">
+<div class="flex items-start justify-between gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-2 py-0.5 bg-green-50 text-green-700 text-xs font-semibold rounded border border-green-100">EASY</span>
+<span class="text-slate-400 font-label-caps">#JS-001 • JavaScript</span>
+</div>
+<h2 class="font-h2 text-h2 text-primary group-hover:text-teal-800 transition-colors">What is the difference between var, let, and const?</h2>
+<p class="text-secondary mt-2 text-body-md line-clamp-1">Explore scope differences, hoisting behavior, and re-assignment rules in modern JS.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 pt-2 border-t border-slate-50 animate-in fade-in slide-in-from-top-1">
+<div class="prose max-w-none space-y-6">
+<div>
+<h3 class="font-h3 text-h3 text-primary mb-3">Key Distinctions</h3>
+<ul class="list-disc pl-5 space-y-3 text-secondary">
+<li><strong class="text-primary">Scope:</strong> <code class="bg-slate-100 px-1 rounded">var</code> is function-scoped, while <code class="bg-slate-100 px-1 rounded">let</code> and <code class="bg-slate-100 px-1 rounded">const</code> are block-scoped.</li>
+<li><strong class="text-primary">Hoisting:</strong> <code class="bg-slate-100 px-1 rounded">var</code> variables are hoisted and initialized as <code class="bg-slate-100 px-1 rounded">undefined</code>. <code class="bg-slate-100 px-1 rounded">let</code>/<code class="bg-slate-100 px-1 rounded">const</code> are hoisted but in the "temporal dead zone".</li>
+<li><strong class="text-primary">Re-assignment:</strong> <code class="bg-slate-100 px-1 rounded">const</code> creates a read-only reference; it cannot be reassigned (though objects can be mutated).</li>
+</ul>
+</div>
+<div class="code-block p-4 rounded-xl border border-primary/5 font-code text-code relative group/code">
+<button class="absolute top-2 right-2 text-slate-400 hover:text-primary transition-colors bg-white/50 p-1 rounded">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+<pre class="text-on-primary-fixed-variant"><code>// Example of Block Scope
+{
+  var a = 1;
+  let b = 2;
+}
+console.log(a); // 1
+console.log(b); // ReferenceError: b is not defined</code></pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+<!-- Question 2 -->
+<div class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all group overflow-hidden">
+<details class="w-full">
+<summary class="p-8 cursor-pointer list-none">
+<div class="flex items-start justify-between gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-2 py-0.5 bg-orange-50 text-orange-700 text-xs font-semibold rounded border border-orange-100">MEDIUM</span>
+<span class="text-slate-400 font-label-caps">#ARCH-008 • Architecture</span>
+</div>
+<h2 class="font-h2 text-h2 text-primary group-hover:text-teal-800 transition-colors">Explain Micro Front-ends and their implementation.</h2>
+<p class="text-secondary mt-2 text-body-md line-clamp-1">Breaking down complex UIs into independent, deployable, and scalable modules.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 pt-2 border-t border-slate-50">
+<div class="prose max-w-none space-y-6">
+<div>
+<h3 class="font-h3 text-h3 text-primary mb-3">Definition &amp; Purpose</h3>
+<p class="text-secondary mb-4 leading-relaxed">Micro Front-ends extend the microservices pattern to the client side. They allow multiple teams to work independently on different parts of a large web application without interference.</p>
+<h3 class="font-h3 text-h3 text-primary mb-3">Popular Strategies</h3>
+<ul class="list-disc pl-5 space-y-3 text-secondary">
+<li><strong class="text-primary">Iframe integration:</strong> Simplest but faces isolation and performance issues.</li>
+<li><strong class="text-primary">Build-time integration:</strong> Publishing sub-apps as npm packages.</li>
+<li><strong class="text-primary">Runtime via Module Federation:</strong> Webpack 5's solution for loading remote chunks dynamically.</li>
+<li><strong class="text-primary">Server-side composition:</strong> Edge side includes (ESI) or server-side routing.</li>
+</ul>
+</div>
+<div class="bg-tertiary-container/5 border-l-4 border-tertiary p-4 rounded">
+<p class="text-on-tertiary-fixed-variant text-body-sm font-medium">Pro-Tip: When asked about this, emphasize the "Trade-offs"—specifically payload size (duplicate dependencies) and consistent UX/styling across teams.</p>
+</div>
+</div>
+</div>
+</details>
+</div>
+<!-- Question 3 -->
+<div class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-all group overflow-hidden">
+<details class="w-full">
+<summary class="p-8 cursor-pointer list-none">
+<div class="flex items-start justify-between gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-3">
+<span class="px-2 py-0.5 bg-red-50 text-red-700 text-xs font-semibold rounded border border-red-100">HARD</span>
+<span class="text-slate-400 font-label-caps">#PERF-012 • Engineering</span>
+</div>
+<h2 class="font-h2 text-h2 text-primary group-hover:text-teal-800 transition-colors">How would you optimize the Core Web Vitals for a heavy e-commerce page?</h2>
+<p class="text-secondary mt-2 text-body-md line-clamp-1">LCP, FID, and CLS optimization techniques for high-traffic commerce sites.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 pt-2 border-t border-slate-50">
+<div class="prose max-w-none space-y-6">
+<div>
+<h3 class="font-h3 text-h3 text-primary mb-3">LCP (Largest Contentful Paint) Optimization</h3>
+<ul class="list-disc pl-5 space-y-3 text-secondary">
+<li>Optimize image delivery using AVIF/WebP and CDN edge resizing.</li>
+<li>Critical CSS inlining to render the above-the-fold content immediately.</li>
+<li>Resource hinting (<code class="bg-slate-100 px-1 rounded">preload</code>, <code class="bg-slate-100 px-1 rounded">preconnect</code>) for hero images and key fonts.</li>
+</ul>
+<h3 class="font-h3 text-h3 text-primary mt-6 mb-3">CLS (Cumulative Layout Shift) Prevention</h3>
+<ul class="list-disc pl-5 space-y-3 text-secondary">
+<li>Reserve space for dynamic elements (ads, banners) with fixed dimensions or aspect-ratio boxes.</li>
+<li>Avoid inserting content above existing content unless it's in response to a user interaction.</li>
+</ul>
+</div>
+<div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+<h4 class="font-bold text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-600">psychology</span>
+                                            Business Scenario
+                                        </h4>
+<p class="text-body-sm text-secondary">Imagine the marketing team wants a pop-up banner on load. How do you balance this with CWV requirements? Mention using "Lazy Hydration" and "Skeleton Screens" as compromises.</p>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-200 mt-xxl">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto">
+<div class="mb-6 md:mb-0">
+<div class="text-lg font-bold text-teal-800 font-h2 mb-2">InterviewPrep Pro</div>
+<p class="font-manrope text-xs leading-relaxed text-slate-500">© 2024 InterviewPrep Pro. Expert guidance for career progression.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-manrope text-xs text-slate-500 hover:text-teal-700 transition-colors" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs text-slate-500 hover:text-teal-700 transition-colors" href="#">Terms of Service</a>
+<a class="font-manrope text-xs text-slate-500 hover:text-teal-700 transition-colors" href="#">Usage Tips</a>
+<a class="font-manrope text-xs text-slate-500 hover:text-teal-700 transition-colors" href="#">Support</a>
+</div>
+<div class="mt-8 md:mt-0 flex gap-4">
+<a class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">globe</span>
+</a>
+<a class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+</div>
+</div>
+</footer>
+<!-- FAB for AI Helper -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all group overflow-hidden">
+<span class="material-symbols-outlined group-hover:hidden">bolt</span>
+<span class="hidden group-hover:block font-label-caps text-[10px]">AI CO-PILOT</span>
+</button>
+</div>
+</body></html>
