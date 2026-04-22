@@ -548,9 +548,15 @@
 
       .toolbar-main {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto auto;
+        grid-template-columns: minmax(0, 1fr) auto auto auto;
         gap: 12px;
         align-items: center;
+      }
+
+      .toolbar-actions {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
       .search-wrap {
@@ -625,9 +631,40 @@
         box-shadow: 0 10px 20px rgba(15, 76, 92, 0.1);
       }
 
+      .utility-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 16px;
+        border: 1px solid rgba(15, 76, 92, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.84);
+        color: var(--primary-strong);
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .utility-toggle:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(15, 76, 92, 0.1);
+      }
+
       .expand-toggle.active {
         background: linear-gradient(135deg, var(--primary), var(--primary-strong));
         border-color: transparent;
+        color: #fff;
+      }
+
+      .utility-toggle.active {
+        border-color: transparent;
+        background: linear-gradient(135deg, rgba(15, 76, 92, 0.96), rgba(0, 52, 65, 0.96));
         color: #fff;
       }
 
@@ -761,6 +798,58 @@
       .insight-card h3 {
         font-size: 22px;
         color: var(--primary-strong);
+      }
+
+      .practice-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .practice-stat {
+        padding: 16px 14px;
+        border: 1px solid rgba(15, 76, 92, 0.08);
+        border-radius: 18px;
+        background: rgba(15, 76, 92, 0.04);
+      }
+
+      .practice-stat strong {
+        display: block;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--primary-strong);
+      }
+
+      .practice-stat span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .practice-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .small-action {
+        min-height: 42px;
+        padding: 0 14px;
+        border-radius: 14px;
+      }
+
+      .small-action:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
       }
 
       .insight-card--accent h2,
@@ -958,6 +1047,54 @@
         line-height: 1.72;
       }
 
+      .card-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0 20px 18px;
+      }
+
+      .mini-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 0 14px;
+        border: 1px solid rgba(15, 76, 92, 0.1);
+        border-radius: 999px;
+        background: rgba(15, 76, 92, 0.04);
+        color: var(--primary-strong);
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform 0.18s ease,
+          background 0.18s ease,
+          color 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+
+      .mini-toggle:hover {
+        transform: translateY(-1px);
+      }
+
+      .mini-toggle.active {
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+        color: #fff;
+        box-shadow: 0 10px 18px rgba(15, 76, 92, 0.18);
+      }
+
+      .mini-toggle--success {
+        background: rgba(46, 139, 87, 0.08);
+        color: #1e6d44;
+      }
+
+      .mini-toggle--success.active {
+        background: linear-gradient(135deg, #2e8b57, #226740);
+      }
+
       .arrow {
         display: inline-flex;
         align-items: center;
@@ -978,6 +1115,14 @@
         transform: rotate(180deg);
         background: linear-gradient(135deg, var(--primary), var(--primary-strong));
         color: #fff;
+      }
+
+      .card[data-completed="true"] {
+        border-color: rgba(46, 139, 87, 0.2);
+      }
+
+      .card[data-completed="true"] .question-title {
+        color: #1d5f42;
       }
 
       .answer-wrap {
@@ -1119,6 +1264,19 @@
           grid-template-columns: 1fr;
         }
 
+        .toolbar-actions {
+          width: 100%;
+        }
+
+        .utility-toggle {
+          flex: 1 1 0;
+        }
+
+        .practice-stats,
+        .practice-actions {
+          grid-template-columns: 1fr;
+        }
+
         .toolbar-summary {
           text-align: left;
         }
@@ -1165,6 +1323,7 @@
         }
 
         .count,
+        .utility-toggle,
         .expand-toggle {
           width: 100%;
         }
@@ -1290,6 +1449,10 @@
               placeholder="搜索关键词：Promise、权限、性能、Vue、BFF..."
             />
           </label>
+          <div class="toolbar-actions">
+            <button class="utility-toggle" id="favoriteFilterToggle" type="button">只看收藏</button>
+            <button class="utility-toggle" id="unfinishedFilterToggle" type="button">只看未完成</button>
+          </div>
           <div class="count" id="visibleCount">显示 0 / 0</div>
           <button class="expand-toggle" id="expandToggle" type="button">展开全部</button>
         </div>
@@ -1307,6 +1470,32 @@
             <p>
               中高级前端题通常不需要百科式背诵，更重要的是你能不能在 1 到 2 分钟里把关键判断讲清楚，并自然落回真实业务场景。
             </p>
+          </article>
+
+          <article class="insight-card">
+            <div class="insight-row">
+              <h3>学习面板</h3>
+              <span id="studySummary">收藏 0 · 完成 0</span>
+            </div>
+            <div class="practice-stats">
+              <div class="practice-stat">
+                <strong id="favoriteCount">0</strong>
+                <span>已收藏</span>
+              </div>
+              <div class="practice-stat">
+                <strong id="completedCount">0</strong>
+                <span>已完成</span>
+              </div>
+              <div class="practice-stat">
+                <strong id="remainingCount">0</strong>
+                <span>待练习</span>
+              </div>
+            </div>
+            <div class="practice-actions">
+              <button class="secondary-action small-action" id="randomQuestionButton" type="button">随机抽题</button>
+              <button class="secondary-action small-action" id="resumeQuestionButton" type="button">继续上次</button>
+            </div>
+            <p id="lastQuestionLabel">还没有最近练习记录。</p>
           </article>
 
           <article class="insight-card">
@@ -1964,6 +2153,12 @@
         }
       ];
 
+      questions.forEach((item, index) => {
+        item.id = `question-${String(index + 1).padStart(3, "0")}`;
+      });
+
+      const questionMap = new Map(questions.map((item) => [item.id, item]));
+      const STORAGE_KEY = "frontend-interview-qa:study-state:v1";
       const uniqueCategories = [...new Set(questions.map((item) => item.category))];
       const categories = ["全部", ...uniqueCategories];
       const categoryCountMap = new Map(
@@ -1974,6 +2169,12 @@
       );
       let activeCategory = "全部";
       let keyword = "";
+      let onlyFavorites = false;
+      let onlyUncompleted = false;
+      let lastOpenedQuestionId = "";
+      let pendingOpenQuestionId = "";
+      const favoriteIds = new Set();
+      const completedIds = new Set();
 
       const board = document.getElementById("questionBoard");
       const chips = document.getElementById("categoryChips");
@@ -1996,10 +2197,21 @@
       const topCategoryList = document.getElementById("topCategoryList");
       const categoryStatHint = document.getElementById("categoryStatHint");
       const expandToggle = document.getElementById("expandToggle");
+      const favoriteFilterToggle = document.getElementById("favoriteFilterToggle");
+      const unfinishedFilterToggle = document.getElementById("unfinishedFilterToggle");
+      const studySummary = document.getElementById("studySummary");
+      const favoriteCount = document.getElementById("favoriteCount");
+      const completedCount = document.getElementById("completedCount");
+      const remainingCount = document.getElementById("remainingCount");
+      const randomQuestionButton = document.getElementById("randomQuestionButton");
+      const resumeQuestionButton = document.getElementById("resumeQuestionButton");
+      const lastQuestionLabel = document.getElementById("lastQuestionLabel");
 
       questionTotal.textContent = String(questions.length);
       categoryTotal.textContent = String(uniqueCategories.length);
       categoryStatHint.textContent = `${uniqueCategories.length} 类主题`;
+      loadState();
+      searchInput.value = keyword;
 
       function escapeHtml(value) {
         return String(value)
@@ -2008,6 +2220,70 @@
           .replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;")
           .replace(/'/g, "&#39;");
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+
+          if (!raw) {
+            return;
+          }
+
+          const state = JSON.parse(raw);
+
+          if (typeof state.keyword === "string") {
+            keyword = state.keyword;
+          }
+
+          if (categories.includes(state.activeCategory)) {
+            activeCategory = state.activeCategory;
+          }
+
+          onlyFavorites = Boolean(state.onlyFavorites);
+          onlyUncompleted = Boolean(state.onlyUncompleted);
+
+          if (Array.isArray(state.favoriteIds)) {
+            state.favoriteIds.forEach((id) => {
+              if (questionMap.has(id)) {
+                favoriteIds.add(id);
+              }
+            });
+          }
+
+          if (Array.isArray(state.completedIds)) {
+            state.completedIds.forEach((id) => {
+              if (questionMap.has(id)) {
+                completedIds.add(id);
+              }
+            });
+          }
+
+          if (typeof state.lastOpenedQuestionId === "string" && questionMap.has(state.lastOpenedQuestionId)) {
+            lastOpenedQuestionId = state.lastOpenedQuestionId;
+          }
+        } catch (error) {
+          console.warn("failed to load local study state", error);
+        }
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify({
+              activeCategory,
+              keyword,
+              onlyFavorites,
+              onlyUncompleted,
+              favoriteIds: [...favoriteIds],
+              completedIds: [...completedIds],
+              lastOpenedQuestionId
+            })
+          );
+        } catch (error) {
+          console.warn("failed to persist local study state", error);
+        }
       }
 
       function getSearchableText(item) {
@@ -2070,6 +2346,7 @@
         chips.querySelectorAll(".chip").forEach((button) => {
           button.addEventListener("click", () => {
             activeCategory = button.dataset.category;
+            saveState();
             renderChips();
             renderQuestions();
           });
@@ -2083,13 +2360,16 @@
           const matchCategory = activeCategory === "全部" || item.category === activeCategory;
           const haystack = getSearchableText(item);
           const matchKeyword = !normalized || haystack.includes(normalized);
+          const matchFavorite = !onlyFavorites || favoriteIds.has(item.id);
+          const matchUncompleted = !onlyUncompleted || !completedIds.has(item.id);
 
-          return matchCategory && matchKeyword;
+          return matchCategory && matchKeyword && matchFavorite && matchUncompleted;
         });
       }
 
       function renderCategoryStats(filtered) {
         const summary = summarizeCategories(filtered);
+        categoryStatHint.textContent = `${summary.length} 类主题`;
 
         if (!summary.length) {
           topCategoryList.innerHTML = `
@@ -2118,15 +2398,61 @@
           .join("");
       }
 
+      function renderStudyPanel(filtered) {
+        const lastQuestion = questionMap.get(lastOpenedQuestionId);
+
+        studySummary.textContent = `收藏 ${favoriteIds.size} · 完成 ${completedIds.size}`;
+        favoriteCount.textContent = String(favoriteIds.size);
+        completedCount.textContent = String(completedIds.size);
+        remainingCount.textContent = String(Math.max(questions.length - completedIds.size, 0));
+        randomQuestionButton.disabled = filtered.length === 0;
+        resumeQuestionButton.disabled = !lastQuestion;
+
+        if (!lastQuestion) {
+          lastQuestionLabel.textContent = "还没有最近练习记录。";
+          return;
+        }
+
+        lastQuestionLabel.textContent = `上次练到：${lastQuestion.category} · ${lastQuestion.question}`;
+      }
+
+      function updateFilterControls() {
+        favoriteFilterToggle.classList.toggle("active", onlyFavorites);
+        favoriteFilterToggle.setAttribute("aria-pressed", onlyFavorites ? "true" : "false");
+        favoriteFilterToggle.textContent = onlyFavorites ? "收藏筛选中" : "只看收藏";
+
+        unfinishedFilterToggle.classList.toggle("active", onlyUncompleted);
+        unfinishedFilterToggle.setAttribute("aria-pressed", onlyUncompleted ? "true" : "false");
+        unfinishedFilterToggle.textContent = onlyUncompleted ? "未完成筛选中" : "只看未完成";
+      }
+
       function renderDashboard(filtered) {
         const total = questions.length;
         const percent = total ? Math.round((filtered.length / total) * 100) : 0;
         const safePercent = filtered.length ? Math.max(percent, 8) : 0;
         const normalizedKeyword = keyword.trim();
         const focusLabel = activeCategory === "全部" ? "全部题目" : activeCategory;
-        const statusText = normalizedKeyword
-          ? `当前聚焦：${focusLabel} · 关键词“${normalizedKeyword}”`
-          : `当前聚焦：${focusLabel}`;
+        const activeModes = [];
+
+        if (onlyFavorites) {
+          activeModes.push("收藏");
+        }
+
+        if (onlyUncompleted) {
+          activeModes.push("未完成");
+        }
+
+        const statusParts = [`当前聚焦：${focusLabel}`];
+
+        if (normalizedKeyword) {
+          statusParts.push(`关键词“${normalizedKeyword}”`);
+        }
+
+        if (activeModes.length) {
+          statusParts.push(`过滤器：${activeModes.join(" / ")}`);
+        }
+
+        const statusText = statusParts.join(" · ");
 
         visibleCount.textContent = `显示 ${filtered.length} / ${total}`;
         focusTotal.textContent = String(filtered.length);
@@ -2136,16 +2462,24 @@
         coverageBar.style.width = `${safePercent}%`;
         heroFocusLabel.textContent = focusLabel;
         activeCategoryBadge.textContent = activeCategory === "全部" ? "全部分类" : activeCategory;
-        activeCategoryLabel.textContent = normalizedKeyword ? `${focusLabel} · 关键词筛选中` : focusLabel;
+        activeCategoryLabel.textContent = activeModes.length
+          ? `${focusLabel} · ${activeModes.join(" + ")}`
+          : normalizedKeyword
+            ? `${focusLabel} · 关键词筛选中`
+            : focusLabel;
         searchStatus.textContent = statusText;
         progressPercent.textContent = `${percent}%`;
         progressFill.style.width = `${safePercent}%`;
         progressLabel.textContent = normalizedKeyword
           ? `当前展示 ${filtered.length} / ${total} 题，关键词过滤已开启，适合集中查漏补缺。`
-          : filtered.length === total
+          : activeModes.length
+            ? `当前展示 ${filtered.length} / ${total} 题，已切换到${activeModes.join(" + ")}视角。`
+            : filtered.length === total
             ? `当前展示全部 ${total} 题，适合完整通刷。`
             : `当前展示 ${filtered.length} / ${total} 题，适合按模块集中练习。`;
 
+        updateFilterControls();
+        renderStudyPanel(filtered);
         renderCategoryStats(filtered);
       }
 
@@ -2166,7 +2500,11 @@
         board.innerHTML = filtered
           .map(
             (item, index) => `
-              <article class="card">
+              <article
+                class="card"
+                data-question-id="${item.id}"
+                data-completed="${completedIds.has(item.id) ? "true" : "false"}"
+              >
                 <div class="card-head">
                   <div class="card-badges">
                     <span class="tag">${escapeHtml(item.category)}</span>
@@ -2191,6 +2529,26 @@
                     </svg>
                   </span>
                 </button>
+                <div class="card-tools">
+                  <button
+                    class="mini-toggle ${favoriteIds.has(item.id) ? "active" : ""}"
+                    type="button"
+                    data-action="favorite"
+                    data-id="${item.id}"
+                    aria-pressed="${favoriteIds.has(item.id) ? "true" : "false"}"
+                  >
+                    ${favoriteIds.has(item.id) ? "已收藏" : "收藏题目"}
+                  </button>
+                  <button
+                    class="mini-toggle mini-toggle--success ${completedIds.has(item.id) ? "active" : ""}"
+                    type="button"
+                    data-action="complete"
+                    data-id="${item.id}"
+                    aria-pressed="${completedIds.has(item.id) ? "true" : "false"}"
+                  >
+                    ${completedIds.has(item.id) ? "已完成" : "标记完成"}
+                  </button>
+                </div>
                 <div class="answer-wrap">
                   <div class="answer">
                     ${item.answer.map(createAnswerBlock).join("")}
@@ -2202,6 +2560,8 @@
           .join("");
 
         bindAccordion();
+        bindCardActions();
+        openPendingQuestion();
       }
 
       function setCardExpanded(card, expanded, immediate = false) {
@@ -2256,6 +2616,82 @@
         expandToggle.textContent = allOpen ? "收起全部" : "展开全部";
       }
 
+      function bindCardActions() {
+        board.querySelectorAll(".mini-toggle").forEach((button) => {
+          button.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            const questionId = button.dataset.id;
+            const action = button.dataset.action;
+            const card = button.closest(".card");
+            const shouldReopen = card?.classList.contains("open");
+
+            if (shouldReopen) {
+              pendingOpenQuestionId = questionId;
+            }
+
+            if (action === "favorite") {
+              if (favoriteIds.has(questionId)) {
+                favoriteIds.delete(questionId);
+              } else {
+                favoriteIds.add(questionId);
+              }
+            }
+
+            if (action === "complete") {
+              if (completedIds.has(questionId)) {
+                completedIds.delete(questionId);
+              } else {
+                completedIds.add(questionId);
+              }
+            }
+
+            saveState();
+            renderQuestions();
+          });
+        });
+      }
+
+      function openPendingQuestion() {
+        if (!pendingOpenQuestionId) {
+          return;
+        }
+
+        const card = board.querySelector(`[data-question-id="${pendingOpenQuestionId}"]`);
+
+        if (!card) {
+          pendingOpenQuestionId = "";
+          return;
+        }
+
+        setCardExpanded(card, true, true);
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        pendingOpenQuestionId = "";
+        syncExpandToggle();
+      }
+
+      function focusQuestionById(questionId, resetFilters = false) {
+        const item = questionMap.get(questionId);
+
+        if (!item) {
+          return;
+        }
+
+        if (resetFilters) {
+          activeCategory = item.category;
+          keyword = "";
+          onlyFavorites = false;
+          onlyUncompleted = false;
+          searchInput.value = "";
+          renderChips();
+        }
+
+        lastOpenedQuestionId = questionId;
+        pendingOpenQuestionId = questionId;
+        saveState();
+        renderQuestions();
+      }
+
       function bindAccordion() {
         const cards = board.querySelectorAll(".card");
 
@@ -2265,6 +2701,13 @@
           button.addEventListener("click", () => {
             const isOpen = card.classList.contains("open");
             setCardExpanded(card, !isOpen);
+
+            if (!isOpen) {
+              lastOpenedQuestionId = card.dataset.questionId;
+              saveState();
+              renderStudyPanel(getFilteredQuestions());
+            }
+
             syncExpandToggle();
           });
         });
@@ -2274,6 +2717,19 @@
 
       searchInput.addEventListener("input", (event) => {
         keyword = event.target.value;
+        saveState();
+        renderQuestions();
+      });
+
+      favoriteFilterToggle.addEventListener("click", () => {
+        onlyFavorites = !onlyFavorites;
+        saveState();
+        renderQuestions();
+      });
+
+      unfinishedFilterToggle.addEventListener("click", () => {
+        onlyUncompleted = !onlyUncompleted;
+        saveState();
         renderQuestions();
       });
 
@@ -2286,6 +2742,30 @@
         });
 
         syncExpandToggle();
+      });
+
+      randomQuestionButton.addEventListener("click", () => {
+        const filtered = getFilteredQuestions();
+
+        if (!filtered.length) {
+          return;
+        }
+
+        const candidatePool =
+          filtered.length > 1 && lastOpenedQuestionId
+            ? filtered.filter((item) => item.id !== lastOpenedQuestionId)
+            : filtered;
+        const selected = candidatePool[Math.floor(Math.random() * candidatePool.length)];
+
+        focusQuestionById(selected.id);
+      });
+
+      resumeQuestionButton.addEventListener("click", () => {
+        if (!lastOpenedQuestionId) {
+          return;
+        }
+
+        focusQuestionById(lastOpenedQuestionId, true);
       });
 
       renderChips();
