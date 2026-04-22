@@ -87,13 +87,10 @@
         max-width: 100%;
       }
 
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.72);
-        background: rgba(252, 249, 248, 0.82);
-        backdrop-filter: blur(20px);
+      .topbar,
+      .hero,
+      .footer-note {
+        display: none;
       }
 
       .topbar-inner,
@@ -205,7 +202,7 @@
       }
 
       .shell {
-        margin: 18px auto 40px;
+        margin: 16px auto 28px;
       }
 
       .hero {
@@ -536,9 +533,9 @@
 
       .toolbar {
         position: sticky;
-        top: 72px;
+        top: 12px;
         z-index: 40;
-        margin: 16px 0 18px;
+        margin: 0 0 14px;
         padding: 14px;
         border: 1px solid rgba(255, 255, 255, 0.72);
         border-radius: 20px;
@@ -676,10 +673,8 @@
       }
 
       .toolbar-meta {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 14px;
-        align-items: center;
+        display: flex;
+        justify-content: flex-end;
         margin-top: 10px;
         padding-top: 10px;
         border-top: 1px solid rgba(15, 76, 92, 0.08);
@@ -690,6 +685,11 @@
         flex-wrap: wrap;
         gap: 10px;
         margin: 0;
+      }
+
+      .chips--stack {
+        display: grid;
+        gap: 8px;
       }
 
       .chip {
@@ -733,6 +733,14 @@
         box-shadow: 0 12px 28px rgba(15, 76, 92, 0.24);
       }
 
+      .chips--stack .chip {
+        justify-content: space-between;
+        width: 100%;
+        min-height: 38px;
+        padding: 0 12px;
+        border-radius: 14px;
+      }
+
       .toolbar-summary {
         color: var(--muted);
         font-size: 13px;
@@ -742,8 +750,8 @@
 
       .workspace {
         display: grid;
-        grid-template-columns: 264px minmax(0, 1fr);
-        gap: 18px;
+        grid-template-columns: 248px minmax(0, 1fr);
+        gap: 14px;
         align-items: start;
       }
 
@@ -753,34 +761,83 @@
 
       .sidebar {
         position: sticky;
-        top: 148px;
+        top: 88px;
         display: grid;
         gap: 12px;
       }
 
-      .insight-card--accent {
-        position: relative;
-        overflow: hidden;
-        background:
-          radial-gradient(circle at top right, rgba(242, 100, 25, 0.2), transparent 30%),
-          linear-gradient(160deg, #0f4c5c, #003441);
-        color: #fff;
+      .nav-panel {
+        padding: 16px;
+        border: 1px solid rgba(15, 76, 92, 0.08);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow-md);
       }
 
-      .insight-card--accent::after {
-        content: "";
-        position: absolute;
-        inset: auto -18% -26% auto;
-        width: 180px;
-        height: 180px;
-        border-radius: 999px;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.14), transparent 72%);
-        pointer-events: none;
+      .nav-panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
       }
 
-      .insight-eyebrow {
-        background: rgba(255, 255, 255, 0.12);
-        color: rgba(255, 255, 255, 0.86);
+      .nav-panel-head h3 {
+        margin: 0;
+        font-size: 15px;
+        letter-spacing: -0.02em;
+      }
+
+      .nav-panel-head span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .nav-copy {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.62;
+      }
+
+      .nav-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .nav-stat {
+        padding: 12px 10px;
+        border-radius: 14px;
+        background: rgba(15, 76, 92, 0.04);
+        border: 1px solid rgba(15, 76, 92, 0.08);
+      }
+
+      .nav-stat strong {
+        display: block;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--primary-strong);
+      }
+
+      .nav-stat span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .nav-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .nav-actions .small-action {
+        width: 100%;
       }
 
       .insight-card h2,
@@ -793,17 +850,6 @@
           "HarmonyOS Sans SC",
           sans-serif;
         letter-spacing: -0.03em;
-      }
-
-      .insight-card h2 {
-        margin-top: 14px;
-        font-size: 22px;
-        line-height: 1.24;
-      }
-
-      .insight-card h3 {
-        font-size: 18px;
-        color: var(--primary-strong);
       }
 
       .practice-stats {
@@ -858,12 +904,6 @@
         box-shadow: none;
       }
 
-      .insight-card--accent h2,
-      .insight-card--accent h3,
-      .insight-card--accent p {
-        color: #fff;
-      }
-
       .insight-row {
         display: flex;
         align-items: center;
@@ -914,21 +954,15 @@
 
       .section-head {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         justify-content: space-between;
         gap: 16px;
-        margin-bottom: 10px;
-        padding: 4px 2px 2px;
-      }
-
-      .section-kicker {
-        background: var(--primary-soft);
-        color: var(--primary);
+        margin-bottom: 8px;
+        padding: 0 2px 2px;
       }
 
       .section-head h2 {
-        margin-top: 8px;
-        font-size: clamp(24px, 3vw, 30px);
+        font-size: clamp(20px, 2.2vw, 24px);
         line-height: 1.12;
       }
 
@@ -947,7 +981,7 @@
 
       .board {
         display: grid;
-        gap: 12px;
+        gap: 10px;
       }
 
       .empty-state {
@@ -988,7 +1022,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding: 14px 16px 0;
+        padding: 12px 14px 0;
       }
 
       .card-badges {
@@ -1026,7 +1060,7 @@
         grid-template-columns: minmax(0, 1fr) auto;
         gap: 14px;
         width: 100%;
-        padding: 10px 16px 12px;
+        padding: 8px 14px 10px;
         border: 0;
         background: transparent;
         color: inherit;
@@ -1040,24 +1074,24 @@
           "Segoe UI Variable Display",
           "HarmonyOS Sans SC",
           sans-serif;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 780;
-        line-height: 1.48;
+        line-height: 1.55;
         letter-spacing: -0.02em;
       }
 
       .question-meta {
         margin-top: 6px;
         color: var(--muted);
-        font-size: 14px;
-        line-height: 1.62;
+        font-size: 13px;
+        line-height: 1.58;
       }
 
       .card-tools {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        padding: 0 16px 12px;
+        padding: 0 14px 10px;
       }
 
       .mini-toggle {
@@ -1138,14 +1172,14 @@
       }
 
       .answer {
-        padding: 0 16px 16px;
+        padding: 0 14px 14px;
         border-top: 1px solid rgba(15, 76, 92, 0.08);
         background: linear-gradient(180deg, rgba(15, 76, 92, 0.03), rgba(255, 255, 255, 0));
       }
 
       .answer section {
-        margin-top: 14px;
-        padding: 14px;
+        margin-top: 12px;
+        padding: 12px;
         border: 1px solid rgba(15, 76, 92, 0.08);
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.96);
@@ -1209,12 +1243,8 @@
         line-height: 1.72;
       }
 
-      body.focus-mode .hero {
-        display: none;
-      }
-
       body.focus-mode .shell {
-        margin-top: 14px;
+        margin-top: 12px;
       }
 
       body.focus-mode .workspace {
@@ -1241,15 +1271,7 @@
       }
 
       body.focus-mode .toolbar {
-        top: 64px;
-      }
-
-      body.focus-mode .toolbar-meta {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      body.focus-mode .toolbar-summary {
-        text-align: left;
+        top: 8px;
       }
 
       @keyframes rise {
@@ -1265,21 +1287,6 @@
       }
 
       @media (max-width: 1100px) {
-        .topbar-inner {
-          grid-template-columns: auto auto;
-        }
-
-        .topnav {
-          grid-column: 1 / -1;
-          justify-content: flex-start;
-          overflow-x: auto;
-          padding-bottom: 4px;
-        }
-
-        .hero {
-          grid-template-columns: 1fr;
-        }
-
         .workspace {
           grid-template-columns: 1fr;
         }
@@ -1294,16 +1301,6 @@
         .topbar-inner,
         .shell {
           width: min(100vw - 20px, 100%);
-        }
-
-        .hero {
-          padding: 22px;
-          border-radius: 24px;
-        }
-
-        .stats,
-        .preview-grid {
-          grid-template-columns: 1fr;
         }
 
         .toolbar {
@@ -1325,7 +1322,8 @@
         }
 
         .practice-stats,
-        .practice-actions {
+        .practice-actions,
+        .nav-stats {
           grid-template-columns: 1fr;
         }
 
@@ -1343,21 +1341,11 @@
         }
 
         .question-title {
-          font-size: 17px;
+          font-size: 15px;
         }
       }
 
       @media (max-width: 640px) {
-        .topbar-inner {
-          grid-template-columns: 1fr;
-          gap: 14px;
-        }
-
-        .hero-actions {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
         .card-head {
           flex-direction: column;
           align-items: flex-start;
@@ -1378,6 +1366,12 @@
         .utility-toggle,
         .expand-toggle {
           width: 100%;
+        }
+
+        .toolbar-actions {
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
     </style>
@@ -1510,72 +1504,64 @@
           <button class="expand-toggle" id="expandToggle" type="button">展开全部</button>
         </div>
         <div class="toolbar-meta">
-          <section class="chips" id="categoryChips"></section>
           <div class="toolbar-summary" id="searchStatus">当前聚焦：全部题目</div>
         </div>
       </section>
 
       <section class="workspace">
         <aside class="sidebar" id="insightPanel">
-          <article class="insight-card insight-card--accent">
-            <span class="insight-eyebrow">答题提示</span>
-            <h2>先给结论，再拆原理，最后回到项目经验。</h2>
-            <p>
-              中高级前端题通常不需要百科式背诵，更重要的是你能不能在 1 到 2 分钟里把关键判断讲清楚，并自然落回真实业务场景。
-            </p>
-          </article>
+          <section class="nav-panel">
+            <div class="nav-panel-head">
+              <h3>分类导航</h3>
+              <span id="categoryStatHint">0 类主题</span>
+            </div>
+            <p class="nav-copy">按主题切换题目列表，把注意力集中在当前模块。</p>
+            <section class="chips chips--stack" id="categoryChips"></section>
+          </section>
 
-          <article class="insight-card">
-            <div class="insight-row">
-              <h3>学习面板</h3>
+          <section class="nav-panel">
+            <div class="nav-panel-head">
+              <h3>学习状态</h3>
               <span id="studySummary">收藏 0 · 完成 0</span>
             </div>
-            <div class="practice-stats">
-              <div class="practice-stat">
+            <div class="nav-stats">
+              <div class="nav-stat">
                 <strong id="favoriteCount">0</strong>
                 <span>已收藏</span>
               </div>
-              <div class="practice-stat">
+              <div class="nav-stat">
                 <strong id="completedCount">0</strong>
                 <span>已完成</span>
               </div>
-              <div class="practice-stat">
+              <div class="nav-stat">
                 <strong id="remainingCount">0</strong>
                 <span>待练习</span>
               </div>
             </div>
-            <div class="practice-actions">
+            <div class="nav-actions">
               <button class="secondary-action small-action" id="randomQuestionButton" type="button">随机抽题</button>
               <button class="secondary-action small-action" id="resumeQuestionButton" type="button">继续上次</button>
             </div>
-            <p id="lastQuestionLabel">还没有最近练习记录。</p>
-          </article>
+            <p class="nav-copy" id="lastQuestionLabel">还没有最近练习记录。</p>
+          </section>
 
-          <article class="insight-card">
-            <div class="insight-row">
-              <h3>当前进度</h3>
+          <section class="nav-panel">
+            <div class="nav-panel-head">
+              <h3>当前视图</h3>
               <span id="progressPercent">0%</span>
             </div>
             <div class="progress-track">
               <i class="progress-fill" id="progressFill" style="width: 0%"></i>
             </div>
-            <p id="progressLabel">当前展示 0 / 0 题，适合完整通刷。</p>
-          </article>
-
-          <article class="insight-card">
-            <div class="insight-row">
-              <h3>分类热度</h3>
-              <span id="categoryStatHint">0 类主题</span>
-            </div>
+            <p class="nav-copy" id="progressLabel">当前展示 0 / 0 题。</p>
             <div class="category-list" id="topCategoryList"></div>
-          </article>
+          </section>
         </aside>
 
         <section class="content">
           <div class="section-head">
             <div>
-              <span class="section-kicker">Question Library</span>
-              <h2>可展开题目列表</h2>
+              <h2>题目列表</h2>
             </div>
             <div class="section-meta" id="activeCategoryLabel">全部分类</div>
           </div>
